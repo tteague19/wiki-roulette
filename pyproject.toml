@@ -9,8 +9,12 @@ homepage = "https://github.com/tteague19/wiki-roulette"
 repository = "https://github.com/tteague19/wiki-roulette"
 keywords = ["wikipedia", "random"]
 
+[tool.poetry.scripts]
+wiki-roulette = "wiki_roulette.console:main"
+
 [tool.poetry.dependencies]
 python = "^3.9"
+click = "^8.1.3"
 
 [tool.poetry.dev-dependencies]
 
