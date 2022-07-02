@@ -3,19 +3,37 @@ import textwrap
 import click
 import requests
 
-from . import __version__
+from src.wiki_roulette import __version__
 
-# This URL is the REST API of the English Wikipedia that returns the summary of
-# a random article from Wikipedia.
-API_URL = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
+# This URL is the REST API of Wikipedia that returns the summary of
+# a random article from Wikipedia. We leave the country code blank to enable
+# a user to specify the language.
+API_URL_TEMPLATE = "/".join(
+    [
+        "https://{language}.wikipedia.org",
+        "api",
+        "rest_v1",
+        "page",
+        "random",
+        "summary"
+    ]
+)
 
 
 @click.command()
+@click.option("-l", "--language", "language", default="en", show_default=True)
 @click.version_option(version=__version__)
-def main() -> None:
-    """Print a random Wikipedia article to the console."""
+def main(language: str) -> None:
+    """
+    Print a random Wikipedia article to the console.
+
+    :param language: The ISO 639-1 language code of the language version of
+        Wikipedia from which to get an article
+    :type language: str
+    """
+    url = API_URL_TEMPLATE.format(language=language)
     try:
-        with requests.get(API_URL) as response:
+        with requests.get(url=url) as response:
             response.raise_for_status()
             data = response.json()
 
@@ -30,5 +48,10 @@ def main() -> None:
 
     except requests.HTTPError:
         click.secho(
-            message=f"The Wikipedia API at {API_URL} is unreachable.",
+            message=f"The Wikipedia API at {url} is unreachable.",
+            fg="red")
+
+    except requests.ConnectionError:
+        click.secho(
+            message=f"Unable to connect to {url}.",
             fg="red")
