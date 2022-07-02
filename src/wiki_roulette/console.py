@@ -1,3 +1,4 @@
+import locale
 import textwrap
 
 import click
@@ -20,8 +21,27 @@ API_URL_TEMPLATE = "/".join(
 )
 
 
+def extract_locale_language_code(split_char: str = "_") -> str:
+    """
+    Obtain the language code associated with the machine's location.
+
+    :param split_char: The character that separates the ISO 639-1 language
+        code from appended specifiers, defaults to "_"
+    :type split_char: str, optional
+    :return: The language code of the current machine
+    :rtype: str
+    """
+    language_code, _ = locale.getdefaultlocale()
+    return language_code.split(split_char)[0]
+
+
 @click.command()
-@click.option("-l", "--language", "language", default="en", show_default=True)
+@click.option(
+    "-l",
+    "--language",
+    "language",
+    default=extract_locale_language_code(),
+    show_default=True)
 @click.version_option(version=__version__)
 def main(language: str) -> None:
     """
