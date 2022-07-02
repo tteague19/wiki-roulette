@@ -1,11 +1,16 @@
 [tool.poetry]
 name = "wiki-roulette"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Display random facts from Wikipedia"
+authors = ["Thomas Teague <thomas.d.teague1@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/tteague19/wiki-roulette"
+repository = "https://github.com/tteague19/wiki-roulette"
+keywords = ["wikipedia", "random"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 
 [tool.poetry.dev-dependencies]
 
