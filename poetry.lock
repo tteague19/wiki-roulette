@@ -242,6 +242,20 @@ pytest = ">=4.6"
 testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtualenv"]
 
 [[package]]
+name = "pytest-mock"
+version = "3.8.1"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+pytest = ">=5.0"
+
+[package.extras]
+dev = ["pre-commit", "tox", "pytest-asyncio"]
+
+[[package]]
 name = "requests"
 version = "2.28.1"
 description = "Python HTTP for Humans."
@@ -309,7 +323,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "9db1b6e0b06a6b46b5b9061b567c4b0346b2aaff3ce5991d64ce6a721ce12ac4"
+content-hash = "1e60097e8a28c9d16b4ffd6559d5498cb7b5f8ef3f134475a54ebf2f53c1eb6c"
 
 [metadata.files]
 argcomplete = [
@@ -434,6 +448,10 @@ pytest = [
 pytest-cov = [
     { file = "pytest-cov-3.0.0.tar.gz", hash = "sha256:e7f0f5b1617d2210a2cabc266dfe2f4c75a8d32fb89eafb7ad9d06f6d076d470" },
     { file = "pytest_cov-3.0.0-py3-none-any.whl", hash = "sha256:578d5d15ac4a25e5f961c938b85a05b09fdaae9deef3bb6de9a6e766622ca7a6" },
+]
+pytest-mock = [
+    { file = "pytest-mock-3.8.1.tar.gz", hash = "sha256:2c6d756d5d3bf98e2e80797a959ca7f81f479e7d1f5f571611b0fdd6d1745240" },
+    { file = "pytest_mock-3.8.1-py3-none-any.whl", hash = "sha256:d989f11ca4a84479e288b0cd1e6769d6ad0d3d7743dcc75e460d1416a5f2135a" },
 ]
 requests = [
     { file = "requests-2.28.1-py3-none-any.whl", hash = "sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349" },
