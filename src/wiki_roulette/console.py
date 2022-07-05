@@ -2,23 +2,9 @@ import locale
 import textwrap
 
 import click
-import requests
 
+import wikipedia
 from src.wiki_roulette import __version__
-
-# This URL is the REST API of Wikipedia that returns the summary of
-# a random article from Wikipedia. We leave the country code blank to enable
-# a user to specify the language.
-API_URL_TEMPLATE = "/".join(
-    [
-        "https://{language}.wikipedia.org",
-        "api",
-        "rest_v1",
-        "page",
-        "random",
-        "summary"
-    ]
-)
 
 
 def extract_locale_language_code(split_char: str = "_") -> str:
@@ -51,10 +37,7 @@ def main(language: str) -> None:
         Wikipedia from which to get an article
     :type language: str
     """
-    url = API_URL_TEMPLATE.format(language=language)
-    with requests.get(url=url) as response:
-        response.raise_for_status()
-        data = response.json()
+    data = wikipedia.obtain_random_page(language=language)
 
     title = data["title"]
     extract = data["extract"]
