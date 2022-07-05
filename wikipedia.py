@@ -1,5 +1,6 @@
 from typing import Any
 
+import click
 import requests
 
 # This URL is the REST API of Wikipedia that returns the summary of
@@ -28,6 +29,11 @@ def obtain_random_page(language: str) -> Any:
     :rtype: Any
     """
     url = API_URL_TEMPLATE.format(language=language)
-    with requests.get(url=url) as response:
-        response.raise_for_status()
-        return response.json()
+
+    try:
+        with requests.get(url=url) as response:
+            response.raise_for_status()
+            return response.json()
+    except requests.RequestException as error:
+        message = str(error)
+        raise click.ClickException(message=message)

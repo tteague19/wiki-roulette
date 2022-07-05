@@ -3,6 +3,7 @@ import unittest.mock
 import click.testing
 import pytest
 import pytest_mock
+import requests
 
 from wiki_roulette import console
 
@@ -128,3 +129,21 @@ def test_main_fails_on_request_error(
     result = runner.invoke(cli=console.main)
 
     assert result.exit_code == 1
+
+
+def test_main_prints_message_on_request_error(
+        mock_requests_get: unittest.mock.MagicMock,
+        runner: click.testing.CliRunner) -> None:
+    """
+    Test whether main() outputs a message when we lack an Internet connection.
+
+    :param mock_requests_get: An object to mock the get() function from
+        requests
+    :type mock_requests_get: unittest.mock.MagicMock
+    :param runner: An object to invoke the CLI
+    :type runner: click.testing.CliRunner
+    """
+    mock_requests_get.side_effect = requests.RequestException
+    result = runner.invoke(console.main)
+
+    assert "Error" in result.output
