@@ -31,3 +31,13 @@ def mock_requests_get(
     }
 
     return mock
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    """
+    Register the e2e hook.
+
+    :param config: An object to configure PyTest
+    :type config: pytest.Config
+    """
+    config.addinivalue_line("markers", "e2e: mark as end-to-end test.")

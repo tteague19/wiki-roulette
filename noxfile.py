@@ -12,6 +12,6 @@ def tests(session: nox.Session) -> None:
     # If the first argument (a set of positional arguments) is non-empty, we
     # use its contents. Otherwise, we default to the settings for coverage.py
     # in the TOML file.
-    args = session.posargs or ["--cov"]
+    args = session.posargs or ["--cov", "-m", "not e2e"]
     session.run("poetry", "install", external=True)
     session.run("pytest", *args)

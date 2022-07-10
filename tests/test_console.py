@@ -29,6 +29,20 @@ def mock_wikipedia_random_page(
     return mocker.patch("wiki_roulette.wikipedia.obtain_random_page")
 
 
+@pytest.mark.e2e
+def test_main_succeeds_in_production_env(
+        runner: click.testing.CliRunner) -> None:
+    """
+    Test the main() function in a live environment.
+
+    :param runner: An object to invoke the CLI
+    :type runner: click.testing.CliRunner
+    """
+    result = runner.invoke(console.main)
+
+    assert result.exit_code == 0
+
+
 def test_main_succeeds(
         mock_requests_get: unittest.mock.MagicMock,
         runner: click.testing.CliRunner) -> None:
