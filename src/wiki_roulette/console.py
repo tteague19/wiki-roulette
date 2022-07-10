@@ -3,8 +3,7 @@ import textwrap
 
 import click
 
-import wikipedia
-from src.wiki_roulette import __version__
+from wiki_roulette import __version__, wikipedia
 
 
 def extract_locale_language_code(split_char: str = "_") -> str:
@@ -26,6 +25,8 @@ def extract_locale_language_code(split_char: str = "_") -> str:
     "-l",
     "--language",
     "language",
+    help="Language edition of Wikipedia",
+    metavar="LANG",
     default=extract_locale_language_code(),
     show_default=True)
 @click.version_option(version=__version__)

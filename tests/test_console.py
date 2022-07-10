@@ -2,45 +2,31 @@ import unittest.mock
 
 import click.testing
 import pytest
-import pytest_mock
+import pytest_mock.plugin
 import requests
 
 from wiki_roulette import console
 
 
 @pytest.fixture()
-def mock_requests_get(
-        mocker: pytest_mock.plugin.MockerFixture) -> unittest.mock.MagicMock:
-    """
-    Create a mock object to mock a GET request.
-
-    :param mocker: A mocker object
-    :type mocker: pytest_mock.plugin.MockerFixture
-    :return: An object to mock the get() function from requests
-    :rtype: unittest.mock.MagicMock
-    """
-    mock = mocker.patch("requests.get")
-    mock.return_value.__enter__.return_value.json.return_value = {
-        "title": "Epictetus",
-        "extract": " ".join(
-            [
-                "Epictetus was a Greek Stoic philosopher.",
-                "He was born into slavery at Hierapolis, Phrygia and",
-                "lived in Rome until his banishment, when he went to",
-                "Nicopolis in northwestern Greece for the rest of his",
-                "life. His teachings were written down and published by",
-                "his pupil Arrian in his Discourses and Enchiridion."
-            ]
-        )
-    }
-
-    return mock
-
-
-@pytest.fixture()
 def runner() -> click.testing.CliRunner:
     """Create an object to invoke the CLI."""
     return click.testing.CliRunner()
+
+
+@pytest.fixture()
+def mock_wikipedia_random_page(
+        mocker: pytest_mock.plugin.MockerFixture) -> unittest.mock.MagicMock:
+    """
+    Create a random page from Wikipedia to use in future tests.
+
+    :param mocker: A mocker object
+    :type mocker: pytest_mock.plugin.MockerFixture
+    :return: An object to mock the obtain_random_page() function from the
+        wikipedia module
+    :rtype: unittest.mock.MagicMock
+    """
+    return mocker.patch("wiki_roulette.wikipedia.obtain_random_page")
 
 
 def test_main_succeeds(
@@ -147,3 +133,20 @@ def test_main_prints_message_on_request_error(
     result = runner.invoke(console.main)
 
     assert "Error" in result.output
+
+
+def test_main_uses_specified_language(
+        mock_wikipedia_random_page: unittest.mock.MagicMock,
+        runner: click.testing.CliRunner) -> None:
+    """
+    Test whether main() outputs a message when we lack an Internet connection.
+
+    :param mock_wikipedia_random_page: An object to mock the get() function from
+        requests
+    :type mock_wikipedia_random_page: unittest.mock.MagicMock
+    :param runner: An object to invoke the CLI
+    :type runner: click.testing.CliRunner
+    """
+    language = "pl"
+    runner.invoke(console.main, [f"--language={language}"])
+    mock_wikipedia_random_page.assert_called_with(language=language)
