@@ -1,5 +1,10 @@
 import nox
 
+# By default, we run Flake8 on the package source tree, the test suite,
+# noxfile.py itself. We can override this default by passing specific
+# source files separated from Nox's options by '--'.
+locations = "src", "tests", "noxfile.py"
+
 
 @nox.session(python=["3.9", "3.10"])
 def tests(session: nox.Session) -> None:
@@ -15,3 +20,19 @@ def tests(session: nox.Session) -> None:
     args = session.posargs or ["--cov", "-m", "not e2e"]
     session.run("poetry", "install", external=True)
     session.run("pytest", *args)
+
+
+@nox.session(python=["3.9", "3.10"])
+def lint(session: nox.Session) -> None:
+    """
+    Run the Flake8 linter on specified sections of code.
+
+    :param session: A nox Session object
+    :type session: nox.Session:return:
+    """
+    args = session.posargs or locations
+
+    # We install Flake8 into the virtual environment via pip with the
+    # following command.
+    session.install("flake8")
+    session.run("flake8", *args)
