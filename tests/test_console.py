@@ -155,8 +155,8 @@ def test_main_uses_specified_language(
     """
     Test whether main() outputs a message when we lack an Internet connection.
 
-    :param mock_wikipedia_random_page: An object to mock the get() function from
-        requests
+    :param mock_wikipedia_random_page: An object to mock the get() function
+        from requests
     :type mock_wikipedia_random_page: unittest.mock.MagicMock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
