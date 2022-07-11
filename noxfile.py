@@ -1,5 +1,8 @@
 import nox
 
+# By default, we exclude Black from the sessions we run.
+nox.options.sessions = "lint", "tests"
+
 # By default, we run Flake8 on the package source tree, the test suite,
 # noxfile.py itself. We can override this default by passing specific
 # source files separated from Nox's options by '--'.
@@ -33,6 +36,6 @@ def lint(session: nox.Session) -> None:
     args = session.posargs or locations
 
     # We install Flake8 into the virtual environment via pip with the
-    # following command.
-    session.install("flake8")
+    # following command. We also add the plugin for Black.
+    session.install("flake8", "flake8-black")
     session.run("flake8", *args)

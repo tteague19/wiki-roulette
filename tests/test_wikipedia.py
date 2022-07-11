@@ -4,7 +4,8 @@ from wiki_roulette import wikipedia
 
 
 def test_obtain_random_page_uses_given_language(
-        mock_requests_get: unittest.mock.MagicMock) -> None:
+        mock_requests_get: unittest.mock.MagicMock,
+) -> None:
     """
     Test the language specification capability of obtain_random_page().
 

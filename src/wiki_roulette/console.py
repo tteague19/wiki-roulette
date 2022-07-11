@@ -28,7 +28,8 @@ def extract_locale_language_code(split_char: str = "_") -> str:
     help="Language edition of Wikipedia",
     metavar="LANG",
     default=extract_locale_language_code(),
-    show_default=True)
+    show_default=True,
+)
 @click.version_option(version=__version__)
 def main(language: str) -> None:
     """

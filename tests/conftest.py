@@ -6,7 +6,8 @@ import pytest_mock
 
 @pytest.fixture()
 def mock_requests_get(
-        mocker: pytest_mock.plugin.MockerFixture) -> unittest.mock.MagicMock:
+        mocker: pytest_mock.plugin.MockerFixture,
+) -> unittest.mock.MagicMock:
     """
     Create a mock object to mock a GET request.
 
@@ -25,9 +26,9 @@ def mock_requests_get(
                 "lived in Rome until his banishment, when he went to",
                 "Nicopolis in northwestern Greece for the rest of his",
                 "life. His teachings were written down and published by",
-                "his pupil Arrian in his Discourses and Enchiridion."
+                "his pupil Arrian in his Discourses and Enchiridion.",
             ]
-        )
+        ),
     }
 
     return mock
