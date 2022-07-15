@@ -1,7 +1,9 @@
+import tempfile
+
 import nox
 
-# By default, we exclude Black from the sessions we run.
-nox.options.sessions = "lint", "tests"
+# By default, we only run the linting, safety, and testing sessions.
+nox.options.sessions = "lint", "safety", "tests"
 
 
 @nox.session(python="3.8")
@@ -59,3 +61,19 @@ def lint(session: nox.Session) -> None:
         "flake8-import-order",
     )
     session.run("flake8", *args)
+
+
+@nox.session(python=["3.9", "3.10"])
+def safety(session):
+    with tempfile.NamedTemporaryFile() as requirements:
+        session.run(
+            "poetry",
+            "export",
+            "--dev",
+            "--format=requirements.txt",
+            "--without-hashes",
+            f"--output={requirements.name}",
+            external=True,
+        )
+        session.install("safety")
+        session.run("safety", "check", f"--file={requirements.name}", "--full-report")
