@@ -16,7 +16,7 @@ def runner() -> click.testing.CliRunner:
 
 @pytest.fixture()
 def mock_wikipedia_random_page(
-        mocker: pytest_mock.plugin.MockerFixture,
+    mocker: pytest_mock.plugin.MockerFixture,
 ) -> unittest.mock.MagicMock:
     """
     Create a random page from Wikipedia to use in future tests.
@@ -31,8 +31,7 @@ def mock_wikipedia_random_page(
 
 
 @pytest.mark.e2e
-def test_main_succeeds_in_production_env(
-        runner: click.testing.CliRunner) -> None:
+def test_main_succeeds_in_production_env(runner: click.testing.CliRunner) -> None:
     """
     Test the main() function in a live environment.
 
@@ -45,8 +44,7 @@ def test_main_succeeds_in_production_env(
 
 
 def test_main_succeeds(
-        mock_requests_get: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.MagicMock, runner: click.testing.CliRunner
 ) -> None:
     """
     Test whether the main() function of console.py succeeds.
@@ -64,8 +62,7 @@ def test_main_succeeds(
 
 
 def test_main_prints_title(
-        mock_requests_get: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.MagicMock, runner: click.testing.CliRunner
 ) -> None:
     """
     Test whether the main() function of console.py retrieves the article title.
@@ -82,8 +79,7 @@ def test_main_prints_title(
 
 
 def test_main_invokes_requests_get(
-        mock_requests_get: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.MagicMock, runner: click.testing.CliRunner
 ) -> None:
     """
     Test whether the fixture actually invokes requests.get.
@@ -100,8 +96,7 @@ def test_main_invokes_requests_get(
 
 
 def test_main_uses_en_wikipedia_org(
-        mock_requests_get: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.MagicMock, runner: click.testing.CliRunner
 ) -> None:
     """
     Test whether the CLI sends a request to the English Wikipedia.
@@ -119,8 +114,7 @@ def test_main_uses_en_wikipedia_org(
 
 
 def test_main_fails_on_request_error(
-        mock_requests_get: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.MagicMock, runner: click.testing.CliRunner
 ) -> None:
     """
     Test whether the CLI fails in an appropriate situations.
@@ -138,8 +132,7 @@ def test_main_fails_on_request_error(
 
 
 def test_main_prints_message_on_request_error(
-        mock_requests_get: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.MagicMock, runner: click.testing.CliRunner
 ) -> None:
     """
     Test whether main() outputs a message when we lack an Internet connection.
@@ -157,8 +150,8 @@ def test_main_prints_message_on_request_error(
 
 
 def test_main_uses_specified_language(
-        mock_wikipedia_random_page: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner,
+    mock_wikipedia_random_page: unittest.mock.MagicMock,
+    runner: click.testing.CliRunner,
 ) -> None:
     """
     Test whether main() outputs a message when we lack an Internet connection.

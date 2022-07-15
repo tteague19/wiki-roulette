@@ -4,6 +4,19 @@ import nox
 nox.options.sessions = "lint", "tests"
 
 
+@nox.session(python="3.8")
+def black(session: nox.Session) -> None:
+    """
+    Run a nox session with the black formatter.
+
+    :param session: A nox Session object
+    :type session: nox.Session
+    """
+    args = session.posargs or locations
+    session.install("black")
+    session.run("black", *args)
+
+
 @nox.session(python=["3.9", "3.10"])
 def tests(session: nox.Session) -> None:
     """
@@ -38,6 +51,5 @@ def lint(session: nox.Session) -> None:
 
     # We install Flake8 into the virtual environment via pip with the
     # following command. We also add the plugin for Black and import order.
-    session.install("flake8", "flake8-black", "flake8-bugbear",
-                    "flake8-import-order")
+    session.install("flake8", "flake8-black", "flake8-bugbear", "flake8-import-order")
     session.run("flake8", *args)

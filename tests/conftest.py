@@ -6,7 +6,7 @@ import pytest_mock
 
 @pytest.fixture()
 def mock_requests_get(
-        mocker: pytest_mock.plugin.MockerFixture,
+    mocker: pytest_mock.plugin.MockerFixture,
 ) -> unittest.mock.MagicMock:
     """
     Create a mock object to mock a GET request.

@@ -7,8 +7,7 @@ import requests
 # a random article from Wikipedia. We leave the country code blank to enable
 # a user to specify the language.
 API_URL_TEMPLATE = "/".join(
-    ["https://{language}.wikipedia.org", "api", "rest_v1", "page", "random",
-     "summary"]
+    ["https://{language}.wikipedia.org", "api", "rest_v1", "page", "random", "summary"]
 )
 
 
