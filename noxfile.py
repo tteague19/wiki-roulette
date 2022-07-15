@@ -38,5 +38,6 @@ def lint(session: nox.Session) -> None:
 
     # We install Flake8 into the virtual environment via pip with the
     # following command. We also add the plugin for Black and import order.
-    session.install("flake8", "flake8-black", "flake8-import-order")
+    session.install("flake8", "flake8-black", "flake8-bugbear",
+                    "flake8-import-order")
     session.run("flake8", *args)

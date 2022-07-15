@@ -30,4 +30,4 @@ def obtain_random_page(language: str) -> Any:
             return response.json()
     except requests.RequestException as error:
         message = str(error)
-        raise click.ClickException(message=message)
+        raise click.ClickException(message=message) from error

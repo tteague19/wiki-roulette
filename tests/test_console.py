@@ -158,7 +158,7 @@ def test_main_prints_message_on_request_error(
 
 def test_main_uses_specified_language(
         mock_wikipedia_random_page: unittest.mock.MagicMock,
-        runner: click.testing.CliRunner
+        runner: click.testing.CliRunner,
 ) -> None:
     """
     Test whether main() outputs a message when we lack an Internet connection.
