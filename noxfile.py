@@ -68,7 +68,26 @@ def lint(session: nox.Session) -> None:
 
 
 @nox.session(python=["3.9", "3.10"])
+def mypy(session: nox.Session) -> None:
+    """
+    Run the mypy type checker.
+
+    :param session: A nox Session object
+    :type session: nox.Session:return:
+    """
+    args = session.posargs or locations
+    install_with_constraints(session, "mypy")
+    session.run("mypy", *args)
+
+
+@nox.session(python=["3.9", "3.10"])
 def safety(session):
+    """
+    Run the safety checker.
+
+    :param session: A nox Session object
+    :type session: nox.Session:return:
+    """
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
             "poetry",
