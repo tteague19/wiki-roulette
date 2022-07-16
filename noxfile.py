@@ -1,4 +1,5 @@
 import tempfile
+from typing import Any
 
 import nox
 
@@ -14,7 +15,7 @@ locations: tuple[str, ...] = ("src", "tests", "noxfile.py")
 package: str = "wikipedia_roulette"
 
 
-def install_with_constraints(session: nox.Session, *args, **kwargs) -> None:
+def install_with_constraints(session: nox.Session, *args: str, **kwargs: Any) -> None:
     """
     Use the Poetry lock file to pin packages used in nox sessions.
 
@@ -34,7 +35,7 @@ def install_with_constraints(session: nox.Session, *args, **kwargs) -> None:
         session.install(f"--constraint={requirements.name}", *args, **kwargs)
 
 
-@nox.session(python="3.8")
+@nox.session(python=["3.9", "3.10"])
 def black(session: nox.Session) -> None:
     """
     Run a nox session with the black formatter.
@@ -62,6 +63,7 @@ def lint(session: nox.Session) -> None:
     install_with_constraints(
         session,
         "flake8",
+        "flake8-annotations",
         "flake8-bandit",
         "flake8-black",
         "flake8-bugbear",
@@ -84,7 +86,7 @@ def mypy(session: nox.Session) -> None:
 
 
 @nox.session(python=["3.9", "3.10"])
-def safety(session):
+def safety(session: nox.Session) -> None:
     """
     Run the safety checker.
 

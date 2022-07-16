@@ -1,20 +1,20 @@
-import unittest
+from unittest.mock import Mock
 
 import pytest
-import pytest_mock
+from pytest_mock import MockerFixture
 
 
 @pytest.fixture()
 def mock_requests_get(
-    mocker: pytest_mock.plugin.MockerFixture,
-) -> unittest.mock.MagicMock:
+    mocker: MockerFixture,
+) -> Mock:
     """
     Create a mock object to mock a GET request.
 
     :param mocker: A mocker object
-    :type mocker: pytest_mock.plugin.MockerFixture
+    :type mocker: MockerFixture
     :return: An object to mock the get() function from requests
-    :rtype: unittest.mock.MagicMock
+    :rtype: Mock
     """
     mock = mocker.patch("requests.get")
     mock.return_value.__enter__.return_value.json.return_value = {
