@@ -1,6 +1,8 @@
-from typing import Any
+from dataclasses import dataclass, field
 
 import click
+import desert
+import marshmallow
 import requests
 
 # This URL is the REST API of Wikipedia that returns the summary of
@@ -11,7 +13,25 @@ API_URL_TEMPLATE: str = "/".join(
 )
 
 
-def obtain_random_page(language: str) -> Any:
+@dataclass()
+class WikipediaPage:
+    """
+    Data class to represent the title and summary of a Wikipedia page.
+
+    :param title: The title of the article on a Wikipedia page
+    :type title: str
+    :param extract: The opening paragraph of the article on a Wikipedia page
+    :type extract: str
+    """
+
+    title: str = field(metadata=desert.metadata(field=marshmallow.fields.String()))
+    extract: str = field(metadata=desert.metadata(field=marshmallow.fields.String()))
+
+
+schema = desert.schema(cls=WikipediaPage, meta={"unknown": marshmallow.EXCLUDE})
+
+
+def obtain_random_page(language: str) -> WikipediaPage:
     """
     Obtain a random page from Wikipedia.
 
@@ -19,14 +39,15 @@ def obtain_random_page(language: str) -> Any:
         an ISO 639-1 or ISO 639-3 code
     :type language: str
     :return: The response from the Wikipedia random article API
-    :rtype: Any
+    :rtype: WikipediaPage
     """
     url = API_URL_TEMPLATE.format(language=language)
 
     try:
         with requests.get(url=url) as response:
             response.raise_for_status()
-            return response.json()
-    except requests.RequestException as error:
+            data = response.json()
+            return schema.load(data=data)
+    except (requests.RequestException, marshmallow.ValidationError) as error:
         message = str(error)
         raise click.ClickException(message=message) from error

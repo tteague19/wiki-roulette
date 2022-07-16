@@ -41,11 +41,8 @@ def main(language: str) -> None:
     """
     data = wikipedia.obtain_random_page(language=language)
 
-    title = data["title"]
-    extract = data["extract"]
-
-    click.secho(message=title, fg="green")
+    click.secho(message=data.title, fg="green")
 
     # The use of textwrap wraps the text so that every line is at most 70
     # characters long.
-    click.echo(message=textwrap.fill(text=extract))
+    click.echo(message=textwrap.fill(text=data.extract))
