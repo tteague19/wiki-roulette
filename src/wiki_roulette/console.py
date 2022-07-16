@@ -17,7 +17,7 @@ def extract_locale_language_code(split_char: str = "_") -> str:
     :rtype: str
     """
     language_code, _ = locale.getdefaultlocale()
-    return language_code.split(split_char)[0]
+    return str(language_code).split(split_char)[0]
 
 
 @click.command()

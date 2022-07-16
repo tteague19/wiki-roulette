@@ -3,7 +3,7 @@ import tempfile
 import nox
 
 # By default, we only run the linting, safety, and testing sessions.
-nox.options.sessions = "lint", "safety", "tests"
+nox.options.sessions = "lint", "mypy", "safety", "tests"
 
 # By default, we run Flake8 on the package source tree, the test suite,
 # noxfile.py itself. We can override this default by passing specific
