@@ -8,7 +8,10 @@ nox.options.sessions = "lint", "mypy", "safety", "tests"
 # By default, we run Flake8 on the package source tree, the test suite,
 # noxfile.py itself. We can override this default by passing specific
 # source files separated from Nox's options by '--'.
-locations = ("src", "tests", "noxfile.py")
+locations: tuple[str, ...] = ("src", "tests", "noxfile.py")
+
+
+package: str = "wikipedia_roulette"
 
 
 def install_with_constraints(session: nox.Session, *args, **kwargs) -> None:
@@ -119,3 +122,17 @@ def tests(session: nox.Session) -> None:
         session, "coverage[toml]", "pytest", "pytest-cov", "pytest-mock"
     )
     session.run("pytest", *args)
+
+
+@nox.session(python=["3.9", "3.10"])
+def typeguard(session: nox.Session) -> None:
+    """
+    Run the Typeguard runtime type checker.
+
+    :param session: A nox Session object
+    :type session: nox.Session
+    """
+    args = session.posargs or ["-m", "not e2e"]
+    session.run("poetry", "install", "--no-dev", external=True)
+    install_with_constraints(session, "pytest", "pytest-mock", "typeguard")
+    session.run("pytest", f"--typeguard-packages={package}", *args)
