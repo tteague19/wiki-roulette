@@ -6,7 +6,7 @@ import requests
 # This URL is the REST API of Wikipedia that returns the summary of
 # a random article from Wikipedia. We leave the country code blank to enable
 # a user to specify the language.
-API_URL_TEMPLATE = "/".join(
+API_URL_TEMPLATE: str = "/".join(
     ["https://{language}.wikipedia.org", "api", "rest_v1", "page", "random", "summary"]
 )
 
