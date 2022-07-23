@@ -3,9 +3,8 @@ import unittest.mock
 
 import click.testing
 import pytest
-from pytest_mock import MockFixture
 import requests
-
+from pytest_mock import MockFixture
 
 from wiki_roulette import console
 
@@ -19,7 +18,7 @@ def runner() -> click.testing.CliRunner:
 @pytest.fixture()
 def mock_wikipedia_random_page(
     mocker: MockFixture,
-) -> unittest.Mock:
+) -> unittest.mock.Mock:
     """
     Create a random page from Wikipedia to use in future tests.
 
@@ -27,7 +26,7 @@ def mock_wikipedia_random_page(
     :type mocker: MockFixture
     :return: An object to mock the obtain_random_page() function from the
         wikipedia module
-    :rtype: unittest.Mock
+    :rtype: unittest.mock.Mock
     """
     return mocker.patch("wiki_roulette.wikipedia.obtain_random_page")
 
@@ -46,14 +45,14 @@ def test_main_succeeds_in_production_env(runner: click.testing.CliRunner) -> Non
 
 
 def test_main_succeeds(
-    mock_requests_get: unittest.Mock, runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.Mock, runner: click.testing.CliRunner
 ) -> None:
     """
     Return a status code of zero via the main() function.
 
     :param mock_requests_get: An object to mock the get() function from
         requests
-    :type mock_requests_get: unittest.Mock
+    :type mock_requests_get: unittest.mock.Mock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
     """
@@ -64,14 +63,14 @@ def test_main_succeeds(
 
 
 def test_main_prints_title(
-    mock_requests_get: unittest.Mock, runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.Mock, runner: click.testing.CliRunner
 ) -> None:
     """
     Retrieve the title of an article via the main() function.
 
     :param mock_requests_get: An object to mock the get() function from
         requests
-    :type mock_requests_get: unittest.Mock
+    :type mock_requests_get: unittest.mock.Mock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
     """
@@ -81,14 +80,14 @@ def test_main_prints_title(
 
 
 def test_main_invokes_requests_get(
-    mock_requests_get: unittest.Mock, runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.Mock, runner: click.testing.CliRunner
 ) -> None:
     """
     Invoke requests.get().
 
     :param mock_requests_get: An object to mock the get() function from
         requests
-    :type mock_requests_get: unittest.Mock
+    :type mock_requests_get: unittest.mock.Mock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
     """
@@ -98,14 +97,14 @@ def test_main_invokes_requests_get(
 
 
 def test_main_uses_en_wikipedia_org(
-    mock_requests_get: unittest.Mock, runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.Mock, runner: click.testing.CliRunner
 ) -> None:
     """
     Send a request to the English Wikipedia via the CLI.
 
     :param mock_requests_get: An object to mock the get() function from
         requests
-    :type mock_requests_get: unittest.Mock
+    :type mock_requests_get: unittest.mock.Mock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
     """
@@ -116,14 +115,14 @@ def test_main_uses_en_wikipedia_org(
 
 
 def test_main_fails_on_request_error(
-    mock_requests_get: unittest.Mock, runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.Mock, runner: click.testing.CliRunner
 ) -> None:
     """
     Cause a failure via the CLI.
 
     :param mock_requests_get: An object to mock the get() function from
         requests
-    :type mock_requests_get: unittest.Mock
+    :type mock_requests_get: unittest.mock.Mock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
     """
@@ -134,14 +133,14 @@ def test_main_fails_on_request_error(
 
 
 def test_main_prints_message_on_request_error(
-    mock_requests_get: unittest.Mock, runner: click.testing.CliRunner
+    mock_requests_get: unittest.mock.Mock, runner: click.testing.CliRunner
 ) -> None:
     """
     Provide an output message via main() when an Internet connection is absent.
 
     :param mock_requests_get: An object to mock the get() function from
         requests
-    :type mock_requests_get: unittest.Mock
+    :type mock_requests_get: unittest.mock.Mock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
     """
@@ -152,7 +151,7 @@ def test_main_prints_message_on_request_error(
 
 
 def test_main_uses_specified_language(
-    mock_wikipedia_random_page: unittest.Mock,
+    mock_wikipedia_random_page: unittest.mock.Mock,
     runner: click.testing.CliRunner,
 ) -> None:
     """
@@ -160,7 +159,7 @@ def test_main_uses_specified_language(
 
     :param mock_wikipedia_random_page: An object to mock the get() function
         from requests
-    :type mock_wikipedia_random_page: unittest.Mock
+    :type mock_wikipedia_random_page: unittest.mock.Mock
     :param runner: An object to invoke the CLI
     :type runner: click.testing.CliRunner
     """
