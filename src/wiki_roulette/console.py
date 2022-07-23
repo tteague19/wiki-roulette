@@ -17,6 +17,11 @@ def extract_locale_language_code(split_char: Optional[str] = "_") -> str:
     :type split_char: str, optional
     :return: The language code of the current machine
     :rtype: str
+
+    .. doctest::
+        >>> lang_code = extract_locale_language_code(split_char="_")
+        >>> lang_code == "en"
+        True
     """
     language_code, _ = locale.getdefaultlocale()
     return str(language_code).split(split_char)[0]
@@ -40,6 +45,14 @@ def main(language: str) -> None:
     :param language: The ISO 639-1 language code of the language version of
         Wikipedia from which to get an article
     :type language: str
+
+    .. testsetup:
+        >>> import click.testing
+    .. doctest:
+        >>> runner = click.testing.CliRunner()
+        >>> result = runner.invoke(main)
+        >>> result.exit_code == 0
+        True
     """
     data = wikipedia.obtain_random_page(language=language)
 

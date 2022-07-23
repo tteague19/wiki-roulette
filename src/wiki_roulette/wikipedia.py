@@ -46,6 +46,12 @@ def obtain_random_page(language: str) -> WikipediaPage:
     :rtype: WikipediaPage
     :raises ClickException: Raise an exception if we provide an invalid
         schema or encounter an error in the GET request
+
+    .. doctest::
+        >>> from wiki_roulette import wikipedia
+        >>> page = wikipedia.obtain_random_page(language="en")
+        >>> bool(page.title)
+        True
     """
     url = API_URL_TEMPLATE.format(language=language)
 
