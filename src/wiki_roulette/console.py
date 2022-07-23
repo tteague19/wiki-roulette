@@ -44,15 +44,6 @@ def main(language: str) -> None:
 
     :param language: The ISO 639-1 language code of the language version of
         Wikipedia from which to get an article
-    :type language: str
-
-    .. testsetup:
-        >>> import click.testing
-    .. doctest:
-        >>> runner = click.testing.CliRunner()
-        >>> result = runner.invoke(main)
-        >>> result.exit_code == 0
-        True
     """
     data = wikipedia.obtain_random_page(language=language)
 

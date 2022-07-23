@@ -10,7 +10,7 @@ nox.options.sessions = "lint", "mypy", "safety", "tests"
 # By default, we run Flake8 on the package source tree, the test suite,
 # noxfile.py itself. We can override this default by passing specific
 # source files separated from Nox's options by '--'.
-locations: tuple[str, ...] = ("src", "tests", "noxfile.py")
+locations: tuple[str, ...] = ("src", "tests", "noxfile.py", "docs/conf.py")
 
 
 package: str = "wiki_roulette"
@@ -50,6 +50,18 @@ def black(session: nox.Session) -> None:
     args = session.posargs or locations
     install_with_constraints(session, "black")
     session.run("black", *args)
+
+
+@nox.session(python=["3.9", "3.10"])
+def docs(session: nox.Session) -> None:
+    """
+    Generate Sphinx documentation for the project.
+
+    :param session: A nox Session object
+    :type session: nox.Session
+    """
+    install_with_constraints(session, "sphinx")
+    session.run("sphinx-build", "docs", "docs/_build")
 
 
 @nox.session(python=["3.9", "3.10"])

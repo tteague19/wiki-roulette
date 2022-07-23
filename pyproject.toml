@@ -38,6 +38,7 @@ flake8-docstrings = "^1.6.0"
 mypy = "^0.971"
 darglint = "^1.8.1"
 xdoctest = "^1.0.1"
+Sphinx = "^5.0.2"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
