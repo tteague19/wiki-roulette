@@ -635,6 +635,21 @@ lint = ["flake8 (>=3.5.0)", "isort", "mypy (>=0.950)", "docutils-stubs", "types-
 test = ["pytest (>=4.6)", "html5lib", "cython", "typed-ast"]
 
 [[package]]
+name = "sphinx-autodoc-typehints"
+version = "1.18.3"
+description = "Type hints (PEP 484) support for the Sphinx autodoc extension"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Sphinx = ">=4.5"
+
+[package.extras]
+testing = ["covdefaults (>=2.2)", "coverage (>=6.3)", "diff-cover (>=6.4)", "nptyping (>=2.1.2)", "pytest (>=7.1)", "pytest-cov (>=3)", "sphobjinv (>=2)", "typing-extensions (>=4.1)"]
+type_comments = ["typed-ast (>=1.5.2)"]
+
+[[package]]
 name = "sphinxcontrib-applehelp"
 version = "1.0.2"
 description = "sphinxcontrib-applehelp is a sphinx extension which outputs Apple help books"
@@ -848,7 +863,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "4752eb1b25e5c6f8b3c2a04b226e672c0046777d332aa270b47eebd6b499c054"
+content-hash = "5d19274f226cd193af70abff5c9b044980dd33b4e8f11485b36b1557b07f3ec9"
 
 [metadata.files]
 alabaster = []
@@ -905,6 +920,7 @@ requests = []
 six = []
 snowballstemmer = []
 sphinx = []
+sphinx-autodoc-typehints = []
 sphinxcontrib-applehelp = []
 sphinxcontrib-devhelp = []
 sphinxcontrib-htmlhelp = []

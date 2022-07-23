@@ -39,6 +39,7 @@ mypy = "^0.971"
 darglint = "^1.8.1"
 xdoctest = "^1.0.1"
 Sphinx = "^5.0.2"
+sphinx-autodoc-typehints = "^1.18.3"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]

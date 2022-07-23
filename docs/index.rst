@@ -6,6 +6,7 @@ The WikiRoulette project.
    :maxdepth: 1
 
    license
+   reference
 
 This project provides a command-line interface that allows a user to print the
 introduction and title of a random article using the
