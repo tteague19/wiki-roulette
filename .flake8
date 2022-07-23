@@ -1,8 +1,9 @@
 [flake8]
-select = ANN,B,B9,BLK,C,E,F,I,S,W
+select = ANN,B,B9,BLK,C,D,E,F,I,S,W
 ignore = ANN401,E203,E501,W503
 max-complexity = 10
 max-line-length = 80
 application-import-names = wiki_roulette,tests
 import-order-style = google
 per-file-ignores = tests/*:S101
+docstring-convention = pep257
