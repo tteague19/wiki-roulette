@@ -58,7 +58,7 @@ def lint(session: nox.Session) -> None:
     Run the Flake8 linter on specified sections of code.
 
     :param session: A nox Session object
-    :type session: nox.Session:return:
+    :type session: nox.Session
     """
     args = session.posargs or locations
 
@@ -84,7 +84,7 @@ def mypy(session: nox.Session) -> None:
     Run the mypy type checker.
 
     :param session: A nox Session object
-    :type session: nox.Session:return:
+    :type session: nox.Session
     """
     args = session.posargs or locations
     install_with_constraints(session, "mypy")
@@ -97,7 +97,7 @@ def safety(session: nox.Session) -> None:
     Run the safety checker.
 
     :param session: A nox Session object
-    :type session: nox.Session:return:
+    :type session: nox.Session
     """
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
