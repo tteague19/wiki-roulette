@@ -1,13 +1,14 @@
 """Provide a command-line interface to get a random article from Wikipedia."""
 import locale
 import textwrap
+from typing import Optional
 
 import click
 
 from wiki_roulette import __version__, wikipedia
 
 
-def extract_locale_language_code(split_char: str = "_") -> str:
+def extract_locale_language_code(split_char: Optional[str] = "_") -> str:
     """
     Obtain the language code associated with the machine's location.
 

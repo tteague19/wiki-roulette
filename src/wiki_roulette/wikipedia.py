@@ -44,6 +44,8 @@ def obtain_random_page(language: str) -> WikipediaPage:
     :type language: str
     :return: The response from the Wikipedia random article API
     :rtype: WikipediaPage
+    :raises ClickException: Raise an exception if we provide an invalid
+        schema or encounter an error in the GET request
     """
     url = API_URL_TEMPLATE.format(language=language)
 

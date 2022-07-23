@@ -22,6 +22,9 @@ def install_with_constraints(session: nox.Session, *args: str, **kwargs: Any) ->
 
     :param session: A nox Session object
     :type session: nox.Session
+    :param *args: A variable-length argument list, which we expect will contain
+        strings
+    :param **kwargs: Arbitrary keyword arguments
     """
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
@@ -70,6 +73,7 @@ def lint(session: nox.Session) -> None:
         "flake8-bugbear",
         "flake8-docstrings",
         "flake8-import-order",
+        "darglint",
     )
     session.run("flake8", *args)
 
