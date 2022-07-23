@@ -1,3 +1,4 @@
+"""Client for the Wikipedia REST API, version 1."""
 from dataclasses import dataclass, field
 
 import click
@@ -34,6 +35,9 @@ schema = desert.schema(cls=WikipediaPage, meta={"unknown": marshmallow.EXCLUDE})
 def obtain_random_page(language: str) -> WikipediaPage:
     """
     Obtain a random page from Wikipedia.
+
+    This function performs a GET request to the /page/random/summary endpoint
+    Wikipedia hosts.
 
     :param language: The language version of Wikipedia to use in the form of
         an ISO 639-1 or ISO 639-3 code

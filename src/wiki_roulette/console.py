@@ -1,3 +1,4 @@
+"""Provide a command-line interface to get a random article from Wikipedia."""
 import locale
 import textwrap
 

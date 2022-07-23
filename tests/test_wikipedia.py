@@ -1,3 +1,4 @@
+"""Test functions in the wikipedia.py module."""
 from unittest.mock import Mock
 
 import click
@@ -11,7 +12,7 @@ def test_obtain_random_page_uses_given_language(
     mock_requests_get: Mock,
 ) -> None:
     """
-    Test the language specification capability of obtain_random_page().
+    Use the language specification capability of obtain_random_page().
 
     :param mock_requests_get: An object to mock the get() function from
         requests
@@ -27,7 +28,7 @@ def test_obtain_random_page_returns_wikipedia_page_object(
     mock_requests_get: Mock,
 ) -> None:
     """
-    Test if the obtain_random_page() function returns a WikipediaPage object.
+    Return a WikipediaPage object via the obtain_random_page() function.
 
     :param mock_requests_get: An object to mock the get() function from
         requests
@@ -39,7 +40,7 @@ def test_obtain_random_page_returns_wikipedia_page_object(
 
 def test_obtain_random_page_handles_validation_errors(mock_requests_get: Mock) -> None:
     """
-    Test whether obtain_random_page() raises an error when given invalid data.
+    Raise an error when the obtain_random_page() receives invalid data.
 
     :param mock_requests_get: An object to mock the get() function from
         requests

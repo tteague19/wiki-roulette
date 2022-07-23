@@ -1,3 +1,4 @@
+"""Configure objects that are available for all test modules."""
 from unittest.mock import Mock
 
 import pytest
