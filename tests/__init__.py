@@ -1,1 +1,1 @@
-"""Package to test functions in the wikipedia_roulette package."""
+"""Package to test functions in the wiki_roulette package."""

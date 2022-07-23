@@ -13,7 +13,7 @@ nox.options.sessions = "lint", "mypy", "safety", "tests"
 locations: tuple[str, ...] = ("src", "tests", "noxfile.py")
 
 
-package: str = "wikipedia_roulette"
+package: str = "wiki_roulette"
 
 
 def install_with_constraints(session: nox.Session, *args: str, **kwargs: Any) -> None:
