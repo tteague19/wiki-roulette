@@ -53,6 +53,14 @@ def black(session: nox.Session) -> None:
 
 
 @nox.session(python=["3.9", "3.10"])
+def coverage(session: nox.Session) -> None:
+    """Upload coverage data."""
+    install_with_constraints(session, "coverage[toml]", "codecov")
+    session.run("coverage", "xml", "--fail-under=0")
+    session.run("codecov", *session.posargs)
+
+
+@nox.session(python=["3.9", "3.10"])
 def docs(session: nox.Session) -> None:
     """
     Generate Sphinx documentation for the project.
