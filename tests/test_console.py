@@ -3,8 +3,8 @@ import unittest.mock
 
 import click.testing
 import pytest
-import requests
 from pytest_mock import MockFixture
+import requests
 
 from wiki_roulette import console
 
