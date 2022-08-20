@@ -7,6 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/tteague19/wiki-roulette"
 repository = "https://github.com/tteague19/wiki-roulette"
+documentation = "http://wiki-roulette.readthedocs.io/"
 keywords = ["wikipedia", "random"]
 
 [tool.poetry.scripts]
